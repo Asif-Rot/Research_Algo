@@ -1,7 +1,27 @@
+import doctest
 import os
 
 
 def lastcall(func):
+    """
+    This is a decorator function.
+    First we check if there is a file that keeps the last call, if there isn't, we will create one.
+    Then, we get in to the inner function and check if there is an output saved in the file, if there is, we print it.
+    We save the result from the function in the file.
+    Finally, we print the function and return it.
+
+    >>> summarize("hi")
+    I already told you that the answer is hi!
+
+    >>> summarize("Asif")
+    I already told you that the answer is hi!
+    I already told you that the answer is Asif!
+
+    >>> f(2)
+    I already told you that the answer is Asif!
+    I already told you that the answer is 4!
+
+    """
     if not os.path.exists('last_calls.txt'):
         open('last_calls.txt', 'w').close()
 
@@ -42,10 +62,22 @@ def summarize(*args):
 def f(x: int):
     return x ** 2
 
+@lastcall
+def f_float(x: float):
+    return x + 1
+
 
 if __name__ == '__main__':
-    summarize("hello")
-    summarize("my name is")
-    summarize("Asif")
-    f(2)
-    f(10)
+    doctest.testmod()
+
+    summarize("hello")  # Should print "I already told you that the answer is hello!"
+    summarize("my name is")  # Should print "I already told you that the answer is hello!\nI already told you that the
+    # answer is my name is!"
+    summarize("Asif")  # Should print "I already told you that the answer is my name is!\nI already told you that the
+    # answer is Asif!"
+    f(2)  # Should print "I already told you that the answer is Asif!\nI already told you that the
+    # answer is 4!"
+    f(10)  # Should print "I already told you that the answer is 4!\nI already told you that the
+    # answer is 100!"
+    f_float(2.5) # Should print "I already told you that the answer is 100!\nI already told you that the
+    # answer is 3.5!"
