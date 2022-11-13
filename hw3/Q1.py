@@ -4,8 +4,15 @@ validRegex = re.compile(r"(^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$)")
 invalidRegex = re.compile(r"(^(.+)@(.+)$)")
 
 
-# Q1
 def sort_valid_emails(file):
+    """
+    This function checks whether there is an email address with the regex we implemented above.
+    If it fits the regex, it will append it to the valid list, if it's not, we will check whether it looks like an email
+    and if it, we will append it to the invalid list.
+
+    :param file: file that contains email addresses
+    :return: Valid emails list, Invalid emails list
+    """
     with open(file) as f:
         lines = f.readlines()
         validemail = []
