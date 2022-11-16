@@ -30,19 +30,15 @@ def print_sorted(x):
 
         if isinstance(y, list):
             sorted_list = []
-            # as above - if complex gets a high str value to be last
             after_sort = sorted(y, key=lambda t: str(t))
             for lst in after_sort:
-                # as above - recursive call and appending by order
                 sorted_list.append(helper(lst))
             return sorted_list
 
         elif isinstance(y, dict):
             sorted_dict = {}
-            # sort by str comparison
             data = dict(sorted(y.items(), key=lambda t: str(t)))
             for key, value in data.items():
-                # recursively sorting the dict's elements and updating the new one
                 sorted_dict[key] = helper(value)
             return sorted_dict
 
@@ -50,13 +46,11 @@ def print_sorted(x):
             sorted_tuple = []
             after_sort = sorted(y, key=lambda t: str(t))
             for tup in after_sort:
-                # as above - recursive call. this time appending as we use a list.
                 sorted_tuple.append(helper(tup))
             return tuple(sorted_tuple)
 
         elif isinstance(y, set):
             sorted_set = []
-            # same as above conditions
             after_sort = sorted(y, key=lambda t: str(t))
             for s in after_sort:
                 sorted_set.append(helper(s))
