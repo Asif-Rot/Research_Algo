@@ -32,8 +32,8 @@ def plot_graph(n):
     labels = []
     algo = []
     theory = []
-    p = round(random.random(), 1)
     for j in range(1, n):
+        p = round(random.random(), 1)
         g = nx.gnp_random_graph((j*10), p)
         labels.append(((j*10), p))
         result = apx_max_independent_set(g)
